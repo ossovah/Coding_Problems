@@ -36,6 +36,7 @@ process for all the possible middle subarrays, and compare their corresponding r
 to find the starting indexes with 3 non-overlapping subarrays that have the largest sum.
 6) We should ensure comparison conditions are done in a way that the solution is lexicographically larger 
 than alternative solutions.
+7) The solution has O(n) time and space complexity.
 """
 
 class Solution(object):
