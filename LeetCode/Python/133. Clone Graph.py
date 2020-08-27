@@ -12,27 +12,21 @@ class Node
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         if not node: return node
+                                       
+        # A dictionary whose keys are node values and the  corresponding values are the 
+        # nodes themselves. We can also check if a node has been visited by checking if
+        # its value is present in the dictionary
+        idx_nodes = {node.val: Node(node.val)}
 
         # Store the nodes to a stack so they can be process during the depth-first search:
-        stack = [node]
-        
-        # A set that stores the node values (indexes) that have been added to the stack:
-        visited = {node.val}    
-                                
-        # A dictionary whose keys are node values (or 1 + list indexes) and the
-        # corresponding values are the nodes themselves:
-        idx_nodes = {node.val: Node(node.val)}      
+        stack = [node]  
                                 
         while stack:
             node = stack.pop()
-            val = node.val
-            neighbors = node.neighbors
-            for nei in neighbors:
-                if nei.val not in visited:
-                    stack.append(nei)
-                    visited.add(nei.val)
+            for nei in node.neighbors:
                 if nei.val not in idx_nodes:
+                    stack.append(nei)
                     idx_nodes[nei.val] = Node(nei.val)
-                idx_nodes[val].neighbors.append(idx_nodes[nei.val])
+                idx_nodes[node.val].neighbors.append(idx_nodes[nei.val])
                 
         return idx_nodes[1]
