@@ -4,13 +4,18 @@ See the problem description at: https://leetcode.com/problems/minimum-add-to-mak
 
 class Solution:
     def minAddToMakeValid(self, S: str) -> int:
-        stack = []
-        for s in S:
-            if s == '(':
-                stack.append(s)
+        """
+        Time complexity : O(n)
+        Space complexity: O(1)
+        """
+        score1 = score2 = 0
+        for char in S:
+            if char == '(':
+                score1 += 1
             else:
-                if stack and stack[-1] == '(':
-                    stack.pop()
-                else:
-                    stack.append(')')
-        return len(stack) 
+                if score1 == 0:
+                    score2 += 1
+                else: 
+                    score1 -= 1
+                
+        return score1 + score2
