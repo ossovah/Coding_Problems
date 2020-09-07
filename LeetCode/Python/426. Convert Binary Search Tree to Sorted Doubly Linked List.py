@@ -23,30 +23,30 @@ class Node:
         self.left = left
         self.right = right
 """
-
 class Solution:
     def treeToDoublyList(self, root: 'Node') -> 'Node':
-        def _build_list(node):
+        def build_list(node):
             if not node.left and not node.right: return node, node
+            
             if node.left:
-                left_low, left_high = _build_list(node.left)
-                node.left = left_high
+                left_low, left_high = build_list(node.left)
                 left_high.right = node
+                node.left = left_high
+                if not node.right: return left_low, node
+                
             if node.right:
-                right_low, right_high = _build_list(node.right)
+                right_low, right_high = build_list(node.right)
                 right_low.left = node
                 node.right = right_low
+                if not node.left: return node, right_high
             
-            if node.left and node.right:
-                return left_low, right_high
-            if node.left:
-                return left_low, node
-            return node, right_high                
+            return left_low, right_high
+                
         
         if not root: return root
         
-        root, tail = _build_list(root)
-        root.left = tail
-        tail.right = root  
+        low, high = build_list(root)
+        low.left = high
+        high.right = low
         
-        return root
+        return low
