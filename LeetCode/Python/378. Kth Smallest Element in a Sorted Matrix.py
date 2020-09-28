@@ -3,7 +3,7 @@ See the problem description at: https://leetcode.com/problems/kth-smallest-eleme
 
 Here are few important notes to the solution:
 
-1) Since both columns are also in increasing order, if k < number of columns, we just need to look into 
+1) Since both rows and columns are also in increasing order, if k < number of rows, we just need to look into 
 the first k rows. Otherwise, we may need to look into all the rows.
 
 2) We also define an array called pointers whose value at index r is the column index of the value 
